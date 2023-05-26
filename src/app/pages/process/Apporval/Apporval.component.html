@@ -1,0 +1,1206 @@
+
+<div class="DataEntryMainContainer">
+  <div class="header bg-danger pb-6">
+    <div class="container-fluid">
+      <div class="header-body">
+        <div class="row align-items-center py-4">
+          <div class="col-lg-6 col-7">
+            <h6 class="h2 text-white d-inline-block mb-0">Process</h6>
+
+            <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+              <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                <li class="breadcrumb-item">
+                  <a href="javascript:void(0)"> <i class="fas fa-home" routerLink="/search/Quicksearch"> </i> </a>
+                </li>
+
+                <li class="breadcrumb-item">
+                  <a href="javascript:void(0)"> Process </a>
+                </li>
+
+                <li aria-current="page" class="breadcrumb-item active">
+                  Appoval
+                </li>
+              </ol>
+            </nav>
+ 
+          </div>
+
+          <div class="col-lg-6 col-5 text-right">
+            <!-- <a
+              class="btn btn-sm btn-neutral"
+              (click)="addDepartment(DepartmentFormPopup)"
+            >
+              Create New Department</a
+            > -->
+            <!-- <button class='btn btn-success' (click)="onSendMail()">
+              Send Mail
+            </button> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- <div class="container-fluid mt--6">
+  <form [formGroup]="DataUploadForm">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="mb-0">Data Entry</h3>
+            <p class="text-sm mb-0"></p>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-12" style="margin: 0 10px 0 0;">
+                <div class="form-group">
+                  <label class="form-control-label" for="TemplateID">
+                    Select Template :
+                  </label>
+                  <select
+                    name="TemplateID"
+                    id="TemplateID"
+                    class="form-control"
+                    formControlName="TemplateID"
+                    (change)="onChangeTemplate()"
+                  >
+                    <option value="0">Select Template Type</option>
+                    <option
+                      *ngFor="let TempL of _TemplateList"
+                      [value]="TempL.id"
+                    >
+                      {{ TempL.TemplateName }}
+                    </option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-control-label" for="BranchID">
+                    Select Branch :
+                  </label>
+                  <select
+                    name="BranchID"
+                    id="BranchID"
+                    class="form-control"
+                    formControlName="BranchID"
+                  >
+                    <option value="0">Select Branch</option>
+                    <option
+                      *ngFor="let _Branch of _BranchList"
+                      [value]="_Branch.id"
+                    >
+                      {{ _Branch.BranchName }}
+                    </option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-control-label" for="DeptID">
+                    Select Department :
+                  </label>
+                  <select
+                    name="DeptID"
+                    id="DeptID"
+                    class="form-control"
+                    formControlName="DeptID"
+                  >
+                    <option value="0">Select Department</option>
+                    <option
+                      *ngFor="let _Department of _DepartmentList"
+                      [value]="_Department.id"
+                    >
+                      {{ _Department.DepartmentName }}
+                    </option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-control-label" for="FileNo">
+                    Search File :
+                  </label>
+                  <div class="input-group input-group-merge">
+                    <input
+                        type="text"
+                        class="form-control"
+                        name="FileNo"
+                        id="FileNo"
+                        placeholder="Search by File No"
+                        formControlName="FileNo"
+                        [readonly]="isReadonly"
+                        aria-describedby="search-addon"
+                      />
+                    <div class="input-group-append" id="search-addon">
+                        <button
+                        class="btn btn-outline-primary"
+                        (click)="GetNextFile()"
+                        type="button"
+                      >
+                        <i class="fa fa-search"></i>
+                      </button>
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12" formGroupName="_ColNameList">
+                <div
+                class="position-relative row form-group"
+                *ngFor="let form_elem of _ColNameList; let i = index"
+                >
+                  <ng-container *ngIf="i > 1">
+                    <ng-container [ngSwitch]="form_elem.FieldType">
+                      <ng-container *ngSwitchCase="'1'">
+                        <label class="form-control-label" for="{{ form_elem.DisplayName }}">
+                          {{ form_elem.DisplayName }}:
+                        </label>
+                        <input
+                        [placeholder]="form_elem.DisplayName"
+                        [name]="form_elem.DisplayName"
+                        [formControlName]="form_elem.IndexField"
+                        [id]="form_elem.IndexField"
+                        type="text"
+                        class="form-control"
+                        minlength="{{ form_elem.MinLenght }}"
+                        maxlength="{{ form_elem.MaxLenght }}"
+                        />
+                      </ng-container>
+                      <ng-container *ngSwitchCase="'2'">
+                        <label class="form-control-label" for="{{ form_elem.DisplayName }}">
+                          {{ form_elem.DisplayName }}:
+                        </label>
+                        <input
+                        [placeholder]="form_elem.DisplayName"
+                        [name]="form_elem.DisplayName"
+                        [formControlName]="form_elem.IndexField"
+                        [id]="form_elem.IndexField"
+                        type="number"
+                        class="form-control"
+                        minlength="{{ form_elem.MinLenght }}"
+                        maxlength="{{ form_elem.MaxLenght }}"
+                        />
+                      </ng-container>
+                      <ng-container *ngSwitchCase="'3'">
+                        <label class="form-control-label" for="{{ form_elem.DisplayName }}">
+                          {{ form_elem.DisplayName }}:
+                        </label>
+                        <input
+                            [name]="form_elem.DisplayName"
+                            [formControlName]="form_elem.IndexField"
+                            [id]="form_elem.IndexField"
+                            [placeholder]="form_elem.DisplayName"
+                            class="form-control"
+                            bsDatepicker
+                            [bsValue]="bsValue"
+                            [bsConfig]="{
+                              isAnimated: true,
+                              containerClass: 'theme-red'
+                            }"
+                          />
+                      </ng-container>
+                      <ng-container *ngSwitchCase="'4'">
+                        <label class="form-control-label" for="{{ form_elem.DisplayName }}">
+                          {{ form_elem.DisplayName }}:
+                        </label>
+                        <select
+                        [name]="form_elem.DisplayName"
+                        [formControlName]="form_elem.IndexField"
+                        [id]="form_elem.IndexField"
+                        class="form-control"
+                        >
+                        <option [value]="0">Select A Value</option>
+                        <option
+                          [value]="opt"
+                          *ngFor="
+                            let opt of form_elem.selectValues;
+                            let i = index
+                          "
+                          >{{ opt }}</option>
+                        </select>
+                      </ng-container>
+                    </ng-container>
+                  </ng-container>
+                </div>
+              </div>
+              <div class="col-sm-12">
+                <div class="text-right">
+                  <button class='btn btn-warning' (click)="OnReset()">
+                    Reset</button
+                  >
+                  <button class='btn btn-success' (click)="onSubmit()">
+                    Save
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="mb-0">Document View</h3>
+            <p class="text-sm mb-0"></p>
+          </div>
+          <div class="card-body" style="padding:0">
+            <div class="row">
+              <div class="col-md-12">
+                <ngx-extended-pdf-viewer  id="Viewer"
+                [page] ="_PageNo"
+                [useBrowserLocale]="true"
+                [textLayer]="true"
+                [showHandToolButton]="true"
+                [height]="'90vh'"
+  
+                *ngIf="FilePath" [src]="FilePath"
+                > by default, most CSS framework set the height to 0
+  
+                </ngx-extended-pdf-viewer>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div> -->
+
+<!-- for process body -->
+
+<div class=" container-fluid mt--6">
+  <div class=" row">
+    <div class=" col">
+      <div class=" card">
+        <div class=" card-header">
+          <h3 class=" mb-0">Update SAP Customer Code </h3>
+          <p class=" text-sm mb-0"></p>
+        </div>
+        <div class="dataTables_wrapper py-4 checklist-table">
+          <div class="row">
+            
+            <div class="col-sm-12 col-md-3">
+              <div class="dataTables_length" id="datatable_length">
+                <label>
+                  Show
+                  <select
+                    name="datatable_length"
+                    aria-controls="datatable"
+                    class="form-control form-control-sm"
+                    (change)="entriesChange($event)"
+                  >
+                    <option value="10" [selected]="entries == 10">10</option>
+                    <option value="25" [selected]="entries == 25">25</option>
+                    <option value="50" [selected]="entries == 50">50</option>
+                    <option value="-1" [selected]="entries == -1">All</option>
+                  </select>
+                  entries
+                </label>
+              </div>
+            </div>
+            <div class="col-sm-3 col-md-3">
+              <div class="form-group">
+                <label class="form-control-label text-right pr-4" for="CompanyID">
+                  Company  
+                </label>
+                <select  name="CompanyID"  id="CompanyID"  class="form-control"  (change)="GetIndexListPending($event.target.value)"               
+                >
+                  <option value="0">Company</option>
+                  <option value="1">UPL</option>
+                  <option value="2">SWAL</option>
+                  <option value="3">ARYSTA</option>
+                  <option value="4">UPL SAS</option>                
+                </select>
+              </div>
+            </div>
+
+            <div class="col-sm-3 col-md-3">
+              <div class="form-group">
+                <label class="form-control-label text-right pr-4" for="CompanyID">
+                  Status  
+                </label>
+                <select  name="CompanyID"  id="CompanyID"  class="form-control"  (change)="GetIndexListPending($event.target.value)"               
+                >
+                  <option value="0">Status</option>
+                  <option value="1">Accept</option>
+                  <option value="2">Reject</option>
+                  <option value="3">Hold</option>
+                                  
+                </select>
+              </div>
+            </div>
+            
+
+            <div class="col-sm-2 col-md-2">
+              <div id="datatable_filter" class="dataTables_filter">
+                <label>
+                  <input
+                    type="search"
+                    class="form-control form-control-sm"
+                    placeholder="Search records"
+                    aria-controls="datatable"
+                    (keyup)="filterTable($event)"
+                  />
+                </label>
+              </div>
+            </div>
+ 
+
+          </div>
+
+          <ngx-datatable
+            *ngIf="_FilteredList"
+            class="material"
+            [columnMode]="'force'"
+            [headerHeight]="50"
+            [footerHeight]="50"
+            [rowHeight]="'auto'"
+            [limit]="entries != -1 ? entries : undefined"
+            [rows]="_FilteredList"
+            (activate)="onActivate($event)" >
+            <ngx-datatable-column name="select" prop="select" [sortable]="false" [externalPaging]="true"
+            [externalSorting]="true" [width]="60">
+              <ng-template
+              ngx-datatable-header-template
+            >
+            <input type="checkbox" [checked]="allSelected" (change)="selectAll($event)" />
+            </ng-template>
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                <input type="checkbox" [checked]="selectedEntries.indexOf(row.FileNo) > -1" (change)="selectRow($event, row.FileNo)" />
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="SrNo" [width]="60">
+              <ng-template let-rowIndex="rowIndex" ngx-datatable-cell-template>{{rowIndex+1}}</ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="File No">
+            
+              <ng-template let-row="row" ngx-datatable-cell-template>{{row.FileNo}}</ng-template>
+            </ngx-datatable-column>
+            
+            <ngx-datatable-column name="FULLFIRMNAME">
+              <ng-template let-row="row" ngx-datatable-cell-template>{{row.FULLFIRMNAME}}</ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="CompanyName">
+              <ng-template let-row="row" ngx-datatable-cell-template>{{row.CompanyName}}</ng-template>
+            </ngx-datatable-column>
+            <!-- <ngx-datatable-column name="Division">
+              <ng-template let-row="row" ngx-datatable-cell-template>{{row.DivisionName}}</ng-template>
+            </ngx-datatable-column> -->
+
+            <ngx-datatable-column name="SenderName">
+              <ng-template let-row="row" ngx-datatable-cell-template>{{row.SenderName}}</ng-template>
+            </ngx-datatable-column>
+
+            <!-- <ngx-datatable-column name="Location">
+              <ng-template let-row="row" ngx-datatable-cell-template>{{row.Location}}</ng-template>
+            </ngx-datatable-column> -->
+
+            <ngx-datatable-column name="Territorycode">
+              <ng-template let-row="row" ngx-datatable-cell-template>{{row.Territorycode}}</ng-template>
+            </ngx-datatable-column>
+
+            
+            <ngx-datatable-column name="Status">
+              <ng-template let-row="row" ngx-datatable-cell-template>{{row.FileStatus}}</ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="InwardDate">
+              <ng-template let-row="row" ngx-datatable-cell-template>{{row.Dateofreceiving}}</ng-template>
+            </ngx-datatable-column>
+
+            
+            <ngx-datatable-column name="Action" sortable="false" prop="id">
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                <button type="button" style="padding:0 0 5px 4px" class="btn btn-icon btn-danger btn-icon-only rounded-circle" (click)="AddIndexing(BranchFormPopup,row)">
+                  <span class="btn-inner--icon"><i class="fa fa-eye"></i></span>
+                </button>
+
+                <button type="button" style="padding:0 0 5px 4px" class="btn btn-icon btn-warning btn-icon-only rounded-circle" (click)="Editinward(InwardFormPopup,row)">
+                  <span class="btn-inner--icon"><i class="fa fa-edit"></i></span>
+                </button>
+          
+
+
+          </ng-template>
+            </ngx-datatable-column>
+          </ngx-datatable>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+</div>
+
+<ng-template #BranchFormPopup let-c="close" let-d="dismiss" let-modal>
+
+  <div class="modal-content">
+    <div class="modal-body p-0">
+
+  <div >
+    <form [formGroup]="DataEntryForm">
+      <div class="row">    
+          <div class="card w-100">
+          
+            <div  >
+              <div class="position-relative row form-group">
+  
+                <div class="col-lg-5 col-md-5 col-sm-6 col-xs-12 paddingclass pr-0">
+                <div class="card-header">
+                  <h3 class="mb-0">Verification</h3>
+                  <p class="text-sm mb-0"></p>
+                </div>
+                <div class="card-body pr-0">
+                  <div class="row">
+                    <!-- <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"> -->
+                    
+  
+                    
+  
+                      <!-- <div class="form-group col-lg-6 col-md-6">
+                        <label class="form-control-label" for="DeptID">
+                        Department :
+                        </label>
+                        <select
+                          name="DeptID"
+                          id="DeptID"
+                          class="form-control"
+                          formControlName="DeptID"
+                        >
+                          <option value="0">Select Department</option>
+                          <option
+                            *ngFor="let _Department of _DepartmentList"
+                            [value]="_Department.id"
+                          >
+                            {{ _Department.DepartmentName }}
+                          </option>
+                        </select>
+                      </div>
+                       -->
+                       <!-- <div class="form-group file_no">
+                        <label class="form-control-label" for="FileNo">
+                          File No
+                        </label>
+                        <input
+                              type="text"
+                              class="form-control"
+                              name="FileNo"
+                              id="FileNo"
+                              placeholder="Search by File No"
+                              formControlName="FileNo"
+                              [readonly]="true"
+                              
+                            />
+                          </div> -->
+
+                          <!-- <div class="input-group-append btndiv" id="search-addon">
+                              <button
+                              class="btn btn-outline-primary"
+                               type="button" >
+
+                              </button>
+                            </div> -->
+                              <!-- <i class="fa fa-search"></i>   (click)="GetNextFile()"
+-->
+                            <!-- </button>
+                          </div> -->
+                  
+
+                      <!-- <div class="form-group col-lg-12 col-md-12">
+                        <label class="form-control-label" for="SenderName">
+                          Document Type
+                        </label>
+                                     
+                          <select name="DocID" id="DocID" class="form-control" formControlName="DocID" >
+                            <option value=0>Select Doc Type</option>   
+                            <option *ngFor="let _Doc of _DeptList" [value]="_Doc.DocTypeID"  >  
+                            {{_Doc.DocName}}  
+                            </option>   
+                          </select>                       
+
+                      </div> -->
+
+                      <!-- <div class="form-group col-lg-12 col-md-12">
+                        <label class="form-control-label" for="Status">
+                          Status
+                        </label>                                     
+                          <select name="Status" id="Status" class="form-control" formControlName="Status" >
+                            <option value=0>Select Status</option>   
+                            <option value=1>Accept</option>   
+                            <option value=2>Reject</option>   
+                            <option value=3>Hold</option>                              
+                          </select>                       
+
+                      </div> -->
+
+<!-- 
+                      <div class="form-group col-lg-12 col-md-12">
+                        <label class="form-control-label" for="Remark">
+                          Remark
+                        </label>
+                        <div class="input-group input-group-merge serchInput">
+                          <input
+                              type="text"
+                              class="form-control"
+                              name="Remark"
+                              id="Remark"                             
+                              formControlName="Remark" 
+                            />
+                          
+                        </div>
+                      </div> -->
+
+                      <table>  
+                        <tr>                   
+                          <td><p class="para">Checklist</p></td>
+                          <td>Scan Status</td>
+                          <td>Status </td>
+                          <td>Remark</td>                                        
+                        </tr>               
+                
+                        <tr>                   
+                            <td  (click)="ViewFile('1')"><p class="para">Customer Agreement</p></td>
+                            <!-- <td><p formControlName="FS1"></p></td> -->
+                            <td><b>                               
+                              <input type="text" class="form-control para_field1" name="FS1" formControlName="FS1" readonly/>
+                            </b></td>    
+                            <td>  <select name="Status1"   class="form-control para_field" formControlName="Status1" >
+                              <option value=0>Select Status</option>   
+                              <option value=1>Accept</option>   
+                              <option value=2>Reject</option>   
+                              <option value=3>Hold</option>                              
+                            </select>  </td>
+                            <td><b> <input type="text" class="form-control para_field" name="Remark1" formControlName="Remark1"/></b></td>                                        
+                          </tr>   
+                          
+                          <tr>                   
+                            <td  (click)="ViewFile('2')" ><p class="para">PAN</p></td>
+                            <td><b>                               
+                              <input type="text" class="form-control para_field1" name="FS2" formControlName="FS2" readonly/>
+                            </b></td>    
+                            <td><b>  <select name="Status2"   class="form-control para_field" formControlName="Status2" >
+                              <option value=0>Select Status</option>   
+                              <option value=1>Accept</option>   
+                              <option value=2>Reject</option>   
+                              <option value=3>Hold</option>                              
+                            </select>   </b></td>
+                            <td><b> <input type="text" class="form-control para_field" name="Remark2" formControlName="Remark2" 
+                            /></b></td>                                        
+                          </tr>   
+
+                          <tr>                   
+                            <td  (click)="ViewFile('3')"><p class="para">PARTNERSHIP DEED/MOA </p></td>
+                            <td><b>                               
+                              <input type="text" class="form-control para_field1" name="FS3" formControlName="FS3" readonly/>
+                            </b></td>    
+                            <td><select name="Status3" class="form-control para_field" formControlName="Status3" >
+                              <option value=0>Select Status</option>   
+                              <option value=1>Accept</option>   
+                              <option value=2>Reject</option>   
+                              <option value=3>Hold</option>                              
+                            </select></td>
+                            <td><input type="text" class="form-control para_field" name="Remark3" formControlName="Remark3" 
+                            /></td>                                        
+                          </tr>   
+
+                          <tr>                   
+                            <td  (click)="ViewFile('4')"><p class="para">Signing authority </p></td>
+                            <td><b>                               
+                              <input type="text" class="form-control para_field1" name="FS4" formControlName="FS4" readonly/>
+                            </b></td>    
+                            <td>  <select name="Status4"   class="form-control para_field" formControlName="Status4" >
+                              <option value=0>Select Status</option>   
+                              <option value=1>Accept</option>   
+                              <option value=2>Reject</option>   
+                              <option value=3>Hold</option>                              
+                            </select>  </td>
+                            <td><input type="text" class="form-control para_field" name="Remark4" formControlName="Remark4"> </td>                                        
+                          </tr>  
+                          
+                          <tr>                   
+                            <td  (click)="ViewFile('5')"><p class="para">Adhaar copy</p></td>
+                            <td><b>                               
+                              <input type="text" class="form-control para_field1" name="FS5" formControlName="FS5" readonly/>
+                            </b></td>    
+                            <td>  <select name="Status5"   class="form-control para_field" formControlName="Status5" >
+                              <option value=0>Select Status</option>   
+                              <option value=1>Accept</option>   
+                              <option value=2>Reject</option>   
+                              <option value=3>Hold</option>                              
+                            </select>  </td>
+                            <td><b> <input type="text" class="form-control para_field" name="Remark5" formControlName="Remark5" 
+                            /></b></td>                                        
+                          </tr>  
+
+                          <tr>                   
+                            <td  (click)="ViewFile('6')"><p class="para">GST/Non GST Declaration </p></td>
+                            <td><b>                               
+                              <input type="text" class="form-control para_field1" name="FS6" formControlName="FS6" readonly/>
+                            </b></td>    
+                            <td>  <select name="Status6"   class="form-control para_field" formControlName="Status6" >
+                              <option value=0>Select Status</option>   
+                              <option value=1>Accept</option>   
+                              <option value=2>Reject</option>   
+                              <option value=3>Hold</option>                              
+                            </select>  </td>
+                            <td><b> <input type="text" class="form-control para_field" name="Remark6" formControlName="Remark6" 
+                            /></b></td>                                        
+                          </tr>  
+                          <tr>                   
+                            <td  (click)="ViewFile('7')"><p class="para">Pesticides License  </p></td>
+                            <td><b>                               
+                              <input type="text" class="form-control para_field1" name="FS7" formControlName="FS7" readonly/>
+                            </b></td>    
+                            <td>  <select name="Status7"   class="form-control para_field" formControlName="Status7" >
+                              <option value=0>Select Status</option>   
+                              <option value=1>Accept</option>   
+                              <option value=2>Reject</option>   
+                              <option value=3>Hold</option>                              
+                            </select>  </td>
+                            <td><b> <input type="text" class="form-control para_field" name="Remark7" formControlName="Remark7" 
+                            /></b></td>                                        
+                          </tr>  
+                          <tr>                   
+                            <td (click)="ViewFile('8')"><p class="para">Seed License</p></td>
+                            <td><b>                               
+                              <input type="text" class="form-control para_field1" name="FS8" formControlName="FS8" readonly/>
+                            </b></td>    
+                            <td>  <select name="Status8"   class="form-control para_field" formControlName="Status8" >
+                              <option value=0>Select Status</option>   
+                              <option value=1>Accept</option>   
+                              <option value=2>Reject</option>   
+                              <option value=3>Hold</option>                              
+                            </select>  </td>
+                            <td><b> <input type="text" class="form-control para_field" name="Remark8" formControlName="Remark8" 
+                            /></b></td>                                        
+                          </tr> 
+                          
+                          <tr>                   
+                            <td (click)="ViewFile('9')"><p class="para">Fertilizer License    </p></td>
+                            <td><b>                               
+                              <input type="text" class="form-control para_field1" name="FS9" formControlName="FS9" readonly/>
+                            </b></td>    
+                            <td>  <select name="Statu9"   class="form-control para_field" formControlName="Status9" >
+                              <option value=0>Select Status</option>   
+                              <option value=1>Accept</option>   
+                              <option value=2>Reject</option>   
+                              <option value=3>Hold</option>                              
+                            </select>  </td>
+                            <td><b> <input type="text" class="form-control para_field" name="Remark9" formControlName="Remark9" 
+                            /></b></td>                                        
+                          </tr> 
+                          <tr>                   
+                            <td (click)="ViewFile('10')"><p class="para">Business policy  </p></td>
+                            <td><b>                               
+                              <input type="text" class="form-control para_field1" name="FS10" formControlName="FS10" readonly/>
+                            </b></td>    
+                            <td>  <select name="Status10"   class="form-control para_field" formControlName="Status10" >
+                              <option value=0>Select Status</option>   
+                              <option value=1>Accept</option>   
+                              <option value=2>Reject</option>   
+                              <option value=3>Hold</option>                              
+                            </select>  </td>
+                            <td><b> <input type="text" class="form-control para_field" name="Remark10" formControlName="Remark10" 
+                            /></b></td>                                        
+                          </tr> 
+
+                          <tr>                   
+                            <td (click)="ViewFile('11')"><p class="para">Cheques   </p></td>
+                            <td><b>                               
+                              <input type="text" class="form-control para_field1" name="FS11" formControlName="FS11" readonly/>
+                            </b></td>    
+                            <td>  <select name="Status11"   class="form-control para_field" formControlName="Status11" >
+                              <option value=0>Select Status</option>   
+                              <option value=1>Accept</option>   
+                              <option value=2>Reject</option>   
+                              <option value=3>Hold</option>                              
+                            </select>  </td>
+                            <td><b> <input type="text" class="form-control para_field" name="Remark11" formControlName="Remark11" 
+                            /></b></td>                                        
+                          </tr> 
+
+                          <tr>                   
+                            <td (click)="ViewFile('12')"><p class="para">Cheque annexure     </p></td>
+                            <td><b>                               
+                              <input type="text" class="form-control para_field1" name="FS12" formControlName="FS12" readonly/>
+                            </b></td>    
+                            <td>  <select name="Status12"   class="form-control para_field" formControlName="Status12" >
+                              <option value=0>Select Status</option>   
+                              <option value=1>Accept</option>   
+                              <option value=2>Reject</option>   
+                              <option value=3>Hold</option>                              
+                            </select>  </td>
+                            <td><b> <input type="text" class="form-control para_field" name="Remark12" formControlName="Remark12" 
+                            /></b></td>                                        
+                          </tr> 
+
+                          <tr>                   
+                            <td (click)="ViewFile('13')"><p class="para">Bank statement        </p></td>
+                            <td><b>                               
+                              <input type="text" class="form-control para_field1" name="FS13" formControlName="FS13" readonly/>
+                            </b></td>    
+                            <td>  <select name="Status13"   class="form-control para_field" formControlName="Status13" >
+                              <option value=0>Select Status</option>   
+                              <option value=1>Accept</option>   
+                              <option value=2>Reject</option>   
+                              <option value=3>Hold</option>                              
+                            </select>  </td>
+                            <td><b> <input type="text" class="form-control para_field" name="Remark13" formControlName="Remark13" 
+                            /></b></td>                                        
+                          </tr> 
+
+                          <tr>                   
+                            <td (click)="ViewFile('14')"> <p class="para">Signing authority annexure     </p></td>
+                            <td><b>                               
+                              <input type="text" class="form-control para_field1" name="FS14" formControlName="FS14" readonly/>
+                            </b></td>    
+                            <td>  <select name="Status14"   class="form-control para_field" formControlName="Status14" >
+                              <option value=0>Select Status</option>   
+                              <option value=1>Accept</option>   
+                              <option value=2>Reject</option>   
+                              <option value=3>Hold</option>                              
+                            </select>  </td>
+                            <td><b> <input type="text" class="form-control para_field" name="Remark14" formControlName="Remark14" 
+                            /></b></td>                                        
+                          </tr> 
+
+                          <tr>                   
+                            <td (click)="ViewFile('15')"><p class="para">Relationship annexure    </p></td>
+                            <td><b>                               
+                              <input type="text" class="form-control para_field1" name="FS15" formControlName="FS15" readonly/>
+                            </b></td>    
+                            <td>  <select name="Status15"   class="form-control para_field" formControlName="Status15" >
+                              <option value=0>Select Status</option>   
+                              <option value=1>Accept</option>   
+                              <option value=2>Reject</option>   
+                              <option value=3>Hold</option>                              
+                            </select>  </td>
+                            <td><b> <input type="text" class="form-control para_field" name="Remark15" formControlName="Remark15" 
+                            /></b></td>                                        
+                          </tr> 
+
+                          <tr>                   
+                            <td (click)="ViewFile('16')"><p class="para">Letter Heads    </p></td>
+                            <td><b>                               
+                              <input type="text" class="form-control para_field1" name="FS16" formControlName="FS16" readonly/>
+                            </b></td>    
+                            <td>  <select name="Status16" class="form-control para_field" formControlName="Status16" >
+                              <option value=0>Select Status</option>   
+                              <option value=1>Accept</option>   
+                              <option value=2>Reject</option>   
+                              <option value=3>Hold</option>                              
+                            </select>  </td>
+                            <td><b> <input type="text" class="form-control para_field" name="Remark16" formControlName="Remark16" 
+                            /></b></td>                                        
+                          </tr> 
+
+                          <tr>                   
+                            <td (click)="ViewFile('17')"><p class="para">Balance Sheet    </p></td>
+                            <td><b>                               
+                              <input type="text" class="form-control para_field1" name="FS17" formControlName="FS17" readonly/>
+                            </b></td>    
+                            <td>  <select name="Status17" class="form-control para_field" formControlName="Status17" >
+                              <option value=0>Select Status</option>   
+                              <option value=1>Accept</option>   
+                              <option value=2>Reject</option>   
+                              <option value=3>Hold</option>                              
+                            </select>  </td>
+                            <td><b> <input type="text" class="form-control para_field" name="Remark17" formControlName="Remark17" 
+                            /></b></td>                                        
+                          </tr> 
+
+                          <tr>                   
+                            <td (click)="ViewFile('18')"><p class="para">Profit & Loss statement  </p></td>
+                            <td><b>                               
+                              <input type="text" class="form-control para_field1" name="FS18" formControlName="FS18" readonly/>
+                            </b></td>    
+                            <td>  <select name="Status18"   class="form-control para_field" formControlName="Status18" >
+                              <option value=0>Select Status</option>   
+                              <option value=1>Accept</option>   
+                              <option value=2>Reject</option>   
+                              <option value=3>Hold</option>                              
+                            </select>  </td>
+                            <td><b> <input type="text" class="form-control para_field" name="Remark18" formControlName="Remark18" 
+                            /></b></td>                                        
+                          </tr> 
+
+                          <tr>                   
+                            <td (click)="ViewFile('19')"><p class="para">Other documents</p></td>
+                            <td><b>                               
+                              <input type="text" class="form-control para_field1" name="FS19" formControlName="FS19" readonly/>
+                            </b></td>    
+                            <td>  <select name="Status19" class="form-control para_field" formControlName="Status19" >
+                              <option value=0>Select Status</option>   
+                              <option value=1>Accept</option>   
+                              <option value=2>Reject</option>   
+                              <option value=3>Hold</option>                              
+                            </select>  </td>
+                            <td><b> <input type="text" class="form-control para_field" name="Remark19" formControlName="Remark19" 
+                            /></b></td>                                        
+                          </tr> 
+
+
+                          <tr>                   
+                            <td>SAP Code</td>
+                            <td>                               
+                              <input type="text" class="form-control para_field1" name="FS19" formControlName="SAPCODE"/>
+                            </td>    
+                            <td>Remark</td>
+                            <td><input type="text" class="form-control para_field" name="Remark" formControlName="Remark" 
+                            /></td>                                        
+                          </tr> 
+
+                                                    
+                      </table>
+
+                      <div>
+                         
+                       
+                      </div>
+
+                      
+                    <!-- </div> -->
+                    <!-- <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" formGroupName="_ColNameList"> -->
+                     
+                    
+
+                    <!-- </div> -->
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pt-3">
+                      <div class="resetsave">
+                        <div class="resetsavebts">
+
+                          <button class='btn btn-success' (click)="OnUpdateSAP()">
+                            Approve
+                          </button>
+                      
+                        <button class='btn btn-success' (click)="onSubmit()">
+                          Reject
+                        </button>
+                        <button class='btn btn-warning' (click)="hidepopup()">
+                          Close</button
+                        >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                </div>
+  
+                <div class="col-lg-7 col-md-7 col-sm-6 col-xs-5 pl-0 paddingclass">
+                  <!-- <div class="card-header">
+                    <h3 class="mb-0">Document View</h3>
+                    <p class="text-sm mb-0"></p>
+                  </div> -->
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <ngx-extended-pdf-viewer  id="Viewer"
+                        [page] ="_PageNo"
+                        [useBrowserLocale]="true"
+                        [textLayer]="true"
+                        [showHandToolButton]="true"
+                        [height]="'110vh'"
+          
+                        *ngIf="FilePath" [src]="FilePath"
+                        > <!-- by default, most CSS framework set the height to 0 -->
+          
+                        </ngx-extended-pdf-viewer>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+  
+              </div>
+            </div>
+          
+          
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+</div>
+</ng-template>
+
+
+<ng-template #InwardFormPopup let-c="close" let-d="dismiss" let-modal>
+
+  <div class="modal-content">
+    <div class="modal-body p-0">
+
+  <div >
+    <form [formGroup]="InwardForm">
+      <div class="row">    
+          <div class="card w-70">
+          
+            <div  >
+              <div class="position-relative row form-group">
+  
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="card-header">
+                  <h3 class="mb-0">Checklist Verification</h3>
+                  <p class="text-sm mb-0"></p>
+                </div>
+                <div class="card-body">
+                  <div class="row">
+                    <!-- <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"> -->
+                    
+                      <div class="card-body">
+                        <div class="row">
+                       
+                          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  
+                            <div class="row">                                
+                              
+                              <div class="col-md-6">
+                                <div class="form-group">
+                                  <label class="form-control-label" for="CompanyID">
+                                    Company  
+                                  </label>
+                                  <select
+                                    name="CompanyID"
+                                    id="CompanyID"
+                                    class="form-control"
+                                    formControlName="CompanyID"
+                                    
+                                  >
+                                    <option value="0">Company</option>
+                                    <option value="1">UPL</option>
+                                    <option value="2">SWAL</option>
+                                    <option value="3">ARYSTA</option>
+                                    <option value="4">UPL SAS</option> 
+                                 
+                                  </select>
+                                </div>
+                              </div>
+        
+                              <div class="col-md-6">
+                                <div class="form-group">
+                                  <label class="form-control-label" for="PODNO">
+                                    POD No
+            
+                                  </label>
+                                  <div class="input-group input-group-merge serchInput">
+                                    <input  type="text"  class="form-control" name="PODNO"  
+                                         formControlName="PODNO"      
+                                      />                      
+                                    
+                                  </div>
+                                </div>
+                              </div>     
+        
+                              <div class="col-md-6">
+                                <div class="form-group">
+                                  <label class="form-control-label" for="CartonNo">
+                                    Carton No
+            
+                                  </label>
+                                  <div class="input-group input-group-merge serchInput">
+                                    <input  type="text"  class="form-control" name="CartonNo"  formControlName="CartonNo"      
+                                      />                      
+                                    
+                                  </div>
+                                </div>
+                              </div>         
+        
+                              <div class="col-md-6">
+                                <div class="form-group">
+                                  <label class="form-control-label" for="FileNo">
+                                    File No
+            
+                                  </label>
+                                  <div class="input-group input-group-merge serchInput">
+                                    <input         type="text"     class="form-control"  name="FileNo" id="FileNo"
+                                        placeholder="Search by File No"  formControlName="FileNo"      
+                                      />                      
+                                    
+                                  </div>
+                                </div>
+                              </div>         
+        
+                              <div class="col-md-6">
+                                <div class="form-group">
+                                  <label class="form-control-label" for="Division">
+                                    Division 
+                                  </label>
+                                  <select
+                                    name="Division"
+                                    id="Division"
+                                    class="form-control"
+                                    formControlName="Division"
+                                  >
+                                  <option value="0">Division</option>
+                                  <option value="1">AF</option>
+                                  <option value="2">FC</option>
+                                  <option value="3">VC</option>
+                                  <option value="4">Unimart</option> 
+                                  <option value="5">Vector</option> 
+                                  <option value="6">Decco</option> 
+                                  </select>
+                                </div>
+                              </div>
+                              <div class="col-md-6">
+                                <div class="form-group">
+                                  <label class="form-control-label" for="SenderName">
+                                    Sender Name
+                                  </label>
+                                  <div class="input-group input-group-merge serchInput">
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        name="SenderName"
+                                        id="SenderName"                           
+                                        formControlName="SenderName"                          
+                                       
+                                      />                      
+                                    
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-6">
+                                <div class="form-group">
+                                  <label class="form-control-label" for="Location"> Location</label>
+                                  <div class="input-group input-group-merge serchInput">
+                                      <input  type="text" class="form-control" name="Location" id="Location"  formControlName="Location" />                      
+                                    
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-6">
+                                <div class="form-group">
+                                  <label class="form-control-label" for="Territorycode"> Territory code</label>
+                                  <div class="input-group input-group-merge serchInput">
+                                      <input  type="text" class="form-control" name="Territorycode" id="Territorycode"  formControlName="Territorycode"   (change)="ongetTerritorycode()" />                      
+                                    
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-6">
+                                <div class="form-group">
+                                  <label class="form-control-label" for="TerrName">Territory Name</label>
+                                  <div class="input-group input-group-merge serchInput">
+                                      <input  type="text" class="form-control" name="TerrName" id="TerrName"  formControlName="TerrName" />                      
+                                    
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-6">
+                                <div class="form-group">
+                                  <label class="form-control-label" for="Region">Region</label>
+                                  <div class="input-group input-group-merge serchInput">
+                                      <input  type="text" class="form-control" name="Region" id="Region"  formControlName="Region" />                      
+                                    
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-6">
+                                <div class="form-group">
+                                  <label class="form-control-label" for="Zone">Zone</label>
+                                  <div class="input-group input-group-merge serchInput">
+                                      <input  type="text" class="form-control" name="Zone" id="Zone"  formControlName="Zone" />                      
+                                    
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-6">
+                                <div class="form-group">
+                                  <label class="form-control-label" for="State">State</label>
+                                  <div class="input-group input-group-merge serchInput">
+                                      <input  type="text" class="form-control" name="State" id="State"  formControlName="State" />                      
+                                    
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-6">
+                                <div class="form-group">
+                                  <label class="form-control-label" for="MobileNo">Mobile no</label>
+                                  <div class="input-group input-group-merge serchInput">
+                                      <input  type="text" class="form-control" name="MobileNo" id="MobileNo"  formControlName="MobileNo" />                      
+                                    
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-6">
+                                <div class="form-group">
+                                  <label class="form-control-label" for="EmailID">EmailID</label>
+                                  <div class="input-group input-group-merge serchInput">
+                                      <input  type="text" class="form-control" name="EmailID" id="EmailID"  formControlName="EmailID" />                      
+                                    
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-6">
+                                <div class="form-group">
+                                  <label class="form-control-label" for="FULLFIRMNAME">FULLFIRMNAME</label>
+                                  <div class="input-group input-group-merge serchInput">
+                                      <input  type="text" class="form-control" name="FULLFIRMNAME" id="FULLFIRMNAME"  formControlName="FULLFIRMNAME" />                      
+                                    
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            
+        
+                            <!-- <div class="form-group">
+                              <label class="form-control-label" for="DeptID">
+                              Department :
+                              </label>
+                              <select
+                                name="DeptID"
+                                id="DeptID"
+                                class="form-control"
+                                formControlName="DeptID"
+                              >
+                                <option value="0">Select Department</option>
+                                <option
+                                  *ngFor="let _Department of _DepartmentList"
+                                  [value]="_Department.id"
+                                >
+                                  {{ _Department.DepartmentName }}
+                                </option>
+                              </select>
+                            </div> -->
+        
+        
+        
+        
+                          </div> 
+                          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="resetsave">
+                              <div class="resetsavebts">
+                            
+                              <button class='btn btn-success' (click)="onEditData()">
+                                Save
+                              </button>
+                              <button class='btn btn-warning' (click)="hidepopup()">
+                                Close</button
+                              >
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                  
+                    
+ 
+                  </div>
+                </div>
+                </div>
+   
+  
+              </div>
+            </div>
+          
+          
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+</div>
+</ng-template>
+
+
+
+

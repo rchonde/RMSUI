@@ -1,0 +1,147 @@
+<div class=" header bg-danger pb-6">
+  <div class=" container-fluid">
+    <div class=" header-body">
+      <div class=" row align-items-center py-4">
+        <div class=" col-lg-6 col-7">
+          <h6 class=" h2 text-white d-inline-block mb-0">Location</h6>
+
+          <!-- <nav
+            aria-label="breadcrumb"
+            class=" d-none d-md-inline-block ml-md-4"
+          >
+            <ol class=" breadcrumb breadcrumb-links breadcrumb-dark">
+              <li class=" breadcrumb-item">
+                <a href="javascript:void(0)"> <i class=" fas fa-home"> </i> </a>
+              </li>
+
+              <li class=" breadcrumb-item">
+                <a href="javascript:void(0)"> Master </a>
+              </li>
+
+              <li aria-current="page" class=" breadcrumb-item active">
+                Template
+              </li>
+            </ol>
+          </nav> -->
+        </div>
+
+        <div class=" col-lg-6 col-5 text-right">
+          <a class=" btn btn-sm btn-neutral" (click)="addLocation(TemplateFormPopup)"> Add Location</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class=" container-fluid mt--6">
+  <div class=" row">
+    <div class=" col">
+      <div class=" card">
+        <div class=" card-header">
+          <h3 class=" mb-0">All Location</h3>
+          <p class=" text-sm mb-0"></p>
+        </div>
+        <div class="dataTables_wrapper py-4">
+       
+
+          <p-table [paginator]="true" [rows]="10" [value]="formattedData" [autoLayout]="true" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50,100]" [(first)]="first" (onPage)="paginate($event)" [loading]="loading" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+            <ng-template pTemplate="caption">
+                <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
+                <input type="text" pInputText size="50" placeholder="Search records" (input)="searchTable($event)" class="global-search">
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr>
+                    <!-- <th [style.width]="'35px'">
+                      <p-checkbox (onChange)="selectAllRow($event, doc)" #e></p-checkbox>
+                    </th> -->
+                    
+                    <th *ngFor="let col of headerList; let i = index;"  [ngStyle]="i==0 && {'width': '6%'}">
+                        {{col.header}}
+                        <!-- <p-sortIcon *ngIf="i==10" [field]="col.field"></p-sortIcon> -->
+                    </th>
+                    <th style="width: 7%;">
+                      ACTION
+                    </th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-car let-rowIndex="rowIndex">
+                <tr>
+                    <!-- <td [style.width]="'35px'">
+                   
+                   
+                    <p-checkbox [(ngModel)]="car.selected" [binary]="true" [ngModelOptions]="{standalone: true}" (onChange)="selectRow($event, car)" #e></p-checkbox>
+                 
+                    </td>
+                     -->
+                    <td *ngFor="let col of headerList">
+                      {{car[col.field]}}
+                    </td>
+                    <td>
+                   
+                      <button type="button" style="padding:0 0 5px 4px" class="btn btn-icon btn-danger btn-icon-only rounded-circle" (click)="editLcoation(TemplateFormPopup,car)">
+                        <span class="btn-inner--icon"><i class="fa fa-edit"></i></span>
+                      </button> 
+
+                      <button  type="button" style="padding:0 0 5px 4px" class="btn btn-icon btn-danger btn-icon-only rounded-circle" (click)="deleteLocation(car)">
+                        <span class="btn-inner--icon"><i class="fa fa-times"></i></span>
+                      </button>
+
+                   
+
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #TemplateFormPopup let-c="close" let-d="dismiss" let-modal>
+  <div class="modal-content">
+    <div class="modal-body p-0">
+      <div class=" card">
+        <div class=" card-header"><h3 class=" mb-0">Add Location</h3></div>
+
+        <div class="card-body">
+          <form class="needs-validation" novalidate="" [formGroup]="AddTemplateForm" (ngSubmit)="onSubmit()">
+            <div class="form-row">
+              <div class="col-md-12 mb-3">
+                <label class="form-control-label">
+                  Location
+                </label>
+                <input class="form-control" formControlName="Location" placeholder="Location" type="text"/>
+                <div class="valid-feedback">Looks good!</div>
+              </div>
+              <div class="col-md-12 mb-3">
+                <label class="form-control-label">
+                  Shelf Capacity
+                </label>
+                <input class="form-control" formControlName="ShelfCapacity" placeholder="Shelf Capacity" type="number"/>
+                <div class="valid-feedback">Looks good!</div>
+              </div>
+
+              <div class="col-md-12 mb-3">
+                <label class="form-control-label">
+                  Box Capacity
+                </label>
+                <input class="form-control" formControlName="BoxCapacity" placeholder="Box Capacity" type="number"/>
+                <div class="valid-feedback">Looks good!</div>
+              </div>
+
+            </div>
+            <button class=" btn btn-primary" type="submit">
+              Submit
+            </button>
+            <button type="button" class="btn btn-warning" (click)="OnReset()">Close</button>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

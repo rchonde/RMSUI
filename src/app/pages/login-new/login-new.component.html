@@ -1,0 +1,149 @@
+  <!-- <div class="login">  
+
+   
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="login_form">
+                    <div class="white_bg">
+                        <h5>Sign In</h5>
+                        <form [formGroup]="loginForm" (keyup.enter)="onSubmit()">
+                            <div class="row pb-4">
+                              <div class="input-group input-group-icon">
+                                <input type="email" placeholder="Email Address" formControlName="username" />
+                                <div class="input-icon"><img src="assets/img/Login/email.svg"></div>
+                                <div class="errorMsg-feedback" *ngIf="f.username.touched && f.username.hasError('required')">Enter
+                                  User ID</div>
+                              </div>
+                              <div class="input-group input-group-icon">
+                                <input type="password" placeholder="Password" formControlName="password" />
+                                <div class="input-icon"><img src="assets/img/Login/lock.svg"></div>
+                                <div class="errorMsg-feedback" *ngIf="f.password.touched && f.password.hasError('required')">Enter
+                                  password</div>
+                              </div>
+                            </div>
+                            <button (click)="onSubmit()">Sign In</button>
+                            <button routerLink="/forgot-password" style="float:right">Forgot Password</button>
+                          </form>
+                    </div>
+                    <p class="pt-3">The power of memory</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="logo">
+      <p>Support : estoragesupport@crownims.com </p>
+        <img src="assets/img/Login/logo.png">
+    </div>
+</div> -->
+
+
+
+<!-- <div class="login">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12 col-lg-7 p-0"> -->
+        <!-- <div class="login_logo text-center">
+          <div class="login_img">
+          <img src="assets/logo1.png"> 
+          <p>The power of memory</p>
+        </div>
+        </div> -->
+      <!-- </div> -->
+      <!-- <div class="col-md-12 col-lg-5 p-0">
+        <div class="login_form d-flex align-content-around flex-wrap">
+          <div class="login_field1">
+          <div class="white_bg">
+            <h5>Sign In</h5>
+            <form [formGroup]="loginForm" (keyup.enter)="onSubmit()">
+                <div class="row pb-2">
+                  <div class="input-group input-group-icon">
+                    <input type="email" placeholder="Username" formControlName="username"/>
+                    <div class="input-icon"><img src="assets/img/email.svg"></div>
+                    <div class="errorMsg-feedback" *ngIf="f.username.touched && f.username.hasError('required')">Enter
+                      User ID</div>
+                  </div>
+                  <div class="input-group input-group-icon">
+                    <input type="password" placeholder="Password" formControlName="password"/>
+                    <div class="input-icon"><img src="assets/img/lock.svg"></div>
+                    <div class="errorMsg-feedback" *ngIf="f.password.touched && f.password.hasError('required')">Enter
+                      password</div>
+                  </div>
+                </div>
+                <button (click)="onSubmit()">Sign In</button>
+                <!-- <button routerLink="/forgot-password" class="ml-3">Forgot Password</button> -->
+            <!--  </form>
+        </div>
+        </div> -->
+
+        <!-- <div class="about">
+          <img src="assets/about.png">
+          <div class="row pt-3">
+            <div class="col-md-5 pb-3">
+              <p>A complete range of services to help you and your business</p>
+              <a href="https://www.crownworldwide.com/en-us" target="_blank">crownworldwide.com</a>
+            </div>
+            <div class="col-md-4">
+              <ul style="border-left: 2px solid #ddd;">
+                <li><a href="https://www.crownworldmobility.com/" target="_blank">World Mobility</a></li>
+                <li><a href="http://www.crownrelo.com/"  target="_blank">Relocations</a></li>
+                <li><a href="http://www.crownrms.com/" target="_blank">Records Management</a></li>
+              </ul>
+            </div>
+            <div class="col-md-3">
+              <ul>
+                <li><a href="https://www.crownfineart.com" target="_blank">Fine Art</a></li>
+                <li><a href="https://www.crown-logistics.com" target="_blank">Logistics</a></li>
+                <li><a href="https://crownworkspace.com" target="_blank">Workspace</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+       -->
+      
+      <!-- </div>
+    </div>
+    </div>
+  </div>
+</div> -->
+
+<div class="login">
+  <div class="container-fiuld">
+      <a href=""><img  class="mb-3 logo_img" src="assets/img/logo.png"></a>
+  </div>
+  <div class="container">
+      <div class="row">
+          <div class="col-md-4">
+              <div class="login_form">
+                  <div class="login_form_white_box">
+                      <h1>Welcome <br>Hello</h1>
+                      <p>Please Login to<br> Your Account!</p>
+                      <form [formGroup]="loginForm" (keyup.enter)="onSubmit()">
+                          <input placeholder="Username" type="text" formControlName="username" required>
+                          <div class="errorMsg-feedback" *ngIf="f.username.touched && f.username.hasError('required')">Enter
+                            User ID</div>
+
+                          <input placeholder="Password" type="password"  formControlName="password" required>
+                          <div class="errorMsg-feedback" *ngIf="f.password.touched && f.password.hasError('required')">Enter
+                            password</div>
+                          <button (click)="onSubmit()">Login</button>
+                          <a routerLink="/forgot-password"><span>Forgot you user name/password?</span></a>
+                          <a href="">CHECK DETAILS</a>
+                      </form>
+                  </div>
+                  <p> Copyright CannyMinds Technology Solutions Private Limited</p>
+                  <ul>
+                      <li><a href="">Support |</a></li>
+                      <li><a href="">Terms of use |</a></li>
+                      <li><a href="">Privacy Policy</a></li>
+                  </ul>
+              </div>
+          </div>
+          <div class="col-md-8">
+              <div class="login_img">
+                  <img src="assets/img/login_img.png">
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

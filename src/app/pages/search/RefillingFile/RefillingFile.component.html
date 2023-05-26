@@ -1,0 +1,378 @@
+
+<div class="DataEntryMainContainer">
+  <div class="header bg-danger pb-6">
+    <div class="container-fluid">
+      <div class="header-body">
+        <div class="row align-items-center py-4">
+          <div class="col-lg-6 col-7">
+            <h6 class="h2 text-white d-inline-block mb-0">Refilling File</h6>
+
+            <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+              <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                <li class="breadcrumb-item">
+                  <a href="javascript:void(0)"> <i class="fas fa-home" routerLink="#"> </i> </a>
+                </li>
+
+                <li class="breadcrumb-item">
+                  <a href="javascript:void(0)"> Search </a>
+                </li>
+
+                <li aria-current="page" class="breadcrumb-item active">
+                  Refilling File
+                </li>
+              </ol>
+            </nav>
+ 
+          </div>
+
+          <div class="col-lg-6 col-5 text-right">
+            <!-- <a
+              class="btn btn-sm btn-neutral"
+              (click)="addDepartment(DepartmentFormPopup)"
+            >
+              Create New Department</a
+            > -->
+          
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+<div class=" container-fluid mt--6">
+
+  <form [formGroup]="ContentSearchForm">
+  <div class=" row">
+    <div class=" col">
+      <div class=" card">
+        <div class=" card-header">
+          <h3 class=" mb-0"></h3>
+          <p class=" text-sm mb-0"></p>
+        </div>
+        <div class="dataTables_wrapper py-4 checklist-table">
+          <div class="row">
+             
+
+            <div class="col-sm-4 col-md-4">
+              <div class="form-group">
+                <label class="form-control-label text-right pr-4" for="Search By">
+                  Search By  
+                </label>
+                <select  name="SearchBy"  id="SearchBy"  class="form-control" formControlName="SearchBy" >
+                  <option value="0">Search By</option>
+                  <option value="1">File No</option>
+                  <option value="2">Carton No</option>  
+                  <option value="8">Document No</option> 
+                  <option value="9">RequestID</option>   
+                  <option value="3">Ref1</option>       
+                  <option value="4">Ref2</option>
+                  <option value="5">Ref3</option>             
+                  <option value="6">Ref4</option>         
+                  <option value="7">LocationBarcode</option>                 
+                 
+                  <!-- <option value="6">Sender</option>
+                  <option value="7">Branch</option>                 -->
+                </select>
+              </div>
+            </div>
+
+          
+
+            <div class="col-sm-4 col-md-4">          
+              <div class="vsearch input-group input-group-merge serchInput">
+               <input    type="text" class="form-control" name="FileNo" formControlName="FileNo" placeholder="Enter values to search"  aria-describedby="search-addon" />
+               <div class="input-group-append btndiv" id="search-addon">
+                   <button
+                   class="btn btn-outline-primary"
+                   (click)="GetFilterSearch()"
+                   type="button"
+                 >
+                   <i class="fa fa-search"></i>
+                 </button>                    
+               </div>                  
+             </div>
+           </div>
+            
+<!-- 
+            <div class="col-sm-2 col-md-2">
+              <div id="datatable_filter" class="v_search dataTables_filter">
+                <label>
+                  <input
+                    type="search"
+                    class="form-control form-control-sm"
+                    placeholder="Search records"
+                    aria-controls="datatable"
+                    (keyup)="filterTable($event)"
+                  />
+                </label>
+              </div>
+            </div> -->
+
+            <div class="col-md-1">    
+              <button type="button" class="btn btn-primary" (click)="GetIndexListPending()" style="float: right;text-align: right;    padding: 5px 15px;">Refresh
+                <!-- <i class="fa fa-refresh"></i> -->
+              </button>
+                              
+            </div>
+ 
+
+          </div>
+
+
+          <p-table [paginator]="true" [rows]="10" [value]="formattedData" [autoLayout]="true" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50,100]" [(first)]="first" (onPage)="paginate($event)" [loading]="loading" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+            <ng-template pTemplate="caption">
+                <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
+                <input type="text" pInputText size="50" placeholder="Search records" (input)="searchTable($event)" class="global-search">
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr>
+                    <!-- <th [style.width]="'35px'">
+                      <p-checkbox (onChange)="selectAllRow($event, doc)" #e></p-checkbox>
+                    </th> -->
+                    
+                    <th *ngFor="let col of headerList; let i = index;"  [ngStyle]="i==0 && {'width': '6%'}">
+                        {{col.header}}
+                        <!-- <p-sortIcon *ngIf="i==10" [field]="col.field"></p-sortIcon> -->
+                    </th>
+                    <th style="width: 5%;">
+                      ACTION
+                    </th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-car let-rowIndex="rowIndex">
+                <tr>
+                    <!-- <td [style.width]="'35px'">
+                   
+                   
+                    <p-checkbox [(ngModel)]="car.selected" [binary]="true" [ngModelOptions]="{standalone: true}" (onChange)="selectRow($event, car)" #e></p-checkbox>
+                 
+                    </td>
+                     -->
+                    <td *ngFor="let col of headerList">
+                      {{car[col.field]}}
+                    </td>
+                    <td>
+                   
+                      <button type="button" style="padding:0 0 5px 4px" class="btn btn-icon btn-danger btn-icon-only rounded-circle" (click)="Editinward(InwardFormPopup,car)">
+                        <span class="btn-inner--icon"><i class="fa fa-plus"></i></span>
+                      </button> 
+
+                       <!-- <button type="button" style="padding:0 0 5px 4px" (click)="ViewDocument(ImageViewFormPopup,car, MetaDataFormPopup)" *ngIf="_isDocView == 'true'" class="btn btn-icon btn-warning btn-icon-only rounded-circle">
+                        <span class="btn-inner--icon"><i class="fa fa-eye"></i></span>
+                      </button>
+                      <button type="button" style="padding:0 0 5px 4px" (click)="EditRowData(car)" *ngIf="_isEdit == 'true'" class="btn btn-icon btn-warning btn-icon-only rounded-circle" >
+                        <span class="btn-inner--icon"><i class="fa fa-edit"></i></span>
+                      </button>
+  
+                      <button type="button" style="padding:0 0 5px 4px" (click)="DownloadFileAll(car.AccNo,car)" *ngIf="_isDownload == 'true'" class="btn btn-icon btn-warning btn-icon-only rounded-circle">
+                        <span class="btn-inner--icon"><i class="fa fa-download"></i></span>
+                      </button>
+                      <button type="button" style="padding:0 0 5px 4px" (click)="DeleteFile(car)" *ngIf="_isDelete == 'true'" class="btn btn-icon btn-danger btn-icon-only rounded-circle">
+                        <span class="btn-inner--icon"><i class="fa fa-trash"></i></span>
+                      </button> -->
+                   
+
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+
+          <!-- <ngx-datatable
+            *ngIf="_FilteredList"
+            class="material"
+            [columnMode]="'force'"
+            [headerHeight]="50"
+            [footerHeight]="50"
+            [rowHeight]="'auto'"
+            [limit]="entries != -1 ? entries : undefined"
+            [rows]="_FilteredList"
+            (activate)="onActivate($event)" >
+  
+
+            <ngx-datatable-column name="SrNo">
+              <ng-template let-rowIndex="rowIndex" ngx-datatable-cell-template>{{rowIndex+1}}</ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="PODNo">
+            
+              <ng-template let-row="row" ngx-datatable-cell-template>{{row.PODNO}}</ng-template>
+            </ngx-datatable-column>
+            
+            <ngx-datatable-column name="BarcodeNo">
+              <ng-template let-row="row" ngx-datatable-cell-template>{{row.BarcodeNo}}</ng-template>
+            </ngx-datatable-column>
+
+
+            <ngx-datatable-column name="InvoiceNo">
+              <ng-template let-row="row" ngx-datatable-cell-template>{{row.InvoiceNo}}</ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="VendorName">
+              <ng-template let-row="row" ngx-datatable-cell-template>{{row.VendorName}}</ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Branch">
+              <ng-template let-row="row" ngx-datatable-cell-template>{{row.BranchName}}</ng-template>
+            </ngx-datatable-column>
+           
+           
+            <ngx-datatable-column name="Status">
+              <ng-template let-row="row" ngx-datatable-cell-template>{{row.Status}}</ng-template>
+            </ngx-datatable-column>
+            
+            <ngx-datatable-column name="POD Date">
+              <ng-template let-row="row" ngx-datatable-cell-template>{{row.PODReceivedDate}}</ng-template>
+            </ngx-datatable-column>
+ 
+         
+            <ngx-datatable-column name="Action" sortable="false" prop="id">
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                
+
+                <button type="button" style="padding:0 0 5px 4px" class="btn btn-icon btn-warning btn-icon-only rounded-circle" (click)="Editinward(InwardFormPopup,row)">
+                  <span class="btn-inner--icon"><i class="fa fa-edit"></i></span>
+                </button> 
+ 
+
+
+          </ng-template>
+            </ngx-datatable-column>
+          </ngx-datatable> -->
+
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  </form>
+</div>
+
+
+
+
+</div>
+
+<ng-template #InwardFormPopup let-c="close" let-d="dismiss" let-modal>
+
+  <div class="modal-content">
+    <div class="modal-body p-0">
+
+  <div >
+    <form [formGroup]="InwardForm">
+      <div class="row">    
+          <div class="card w-70">
+          
+            <div  >
+              <div class="position-relative row form-group">
+  
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="card-header">
+                  <h3 class="mb-0">Refilling File</h3>
+                  <p class="text-sm mb-0"></p>
+                </div>
+                <div class="card-body">
+                  <div class="row">
+                    <!-- <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"> -->
+                    
+                      <div class="card-body">
+                        <div class="row">
+                       
+                          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  
+                            <div class="row"> 
+                              
+                              <div class="col-md-12">
+                                <div class="form-group">
+                                  <label class="form-control-label" for="LocationBarcode">Location Barcode</label>
+                                  <div class="input-group input-group-merge serchInput">
+                                    <input   type="text"  class="form-control" name="LocationBarcode" formControlName="LocationBarcode" />                      
+                                    
+                                  </div>
+                                </div>
+                              </div>  
+
+                              <div class="col-md-12">
+                                <div class="form-group">
+                                  <label class="form-control-label" for="CartonNo">Carton No</label>
+                                  <div class="input-group input-group-merge serchInput">
+                                    <input   type="text"  class="form-control" name="CartonNo" formControlName="CartonNo" />                      
+                                    
+                                  </div>
+                                </div>
+                              </div>  
+
+                              <div class="col-md-12">
+                                <div class="form-group">
+                                  <label class="form-control-label" for="FileNo"> File No </label>
+                                  <div class="input-group input-group-merge serchInput">
+                                    <input readonly type="text"  class="form-control" name="FileNo" formControlName="FileNo" />                      
+                                    
+                                  </div>
+                                </div>
+                              </div> 
+                              
+                              <div class="col-md-12">
+                                <div class="form-group">
+                                  <label class="form-control-label" for="DocumentNo"> Document No</label>
+                                  <div class="input-group input-group-merge serchInput">
+                                    <input readonly type="text"  class="form-control" name="DocumentNo" formControlName="DocumentNo" />                      
+                                    
+                                  </div>
+                                </div>
+                              </div> 
+                              
+
+                            
+
+                              
+
+                              <!-- <div class="col-md-12">
+                                <div class="form-group">
+                                  <label class="form-control-label" for="Remark">Remark</label>
+                                  <div class="input-group input-group-merge serchInput">
+                                    <input  type="text"  class="form-control" name="Remark" formControlName="Remark" />                      
+                                    
+                                  </div>
+                                </div>
+                              </div>            -->
+             
+                            </div>
+                          </div> 
+                          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="resetsave">
+                              <div class="resetsavebts">
+                            
+                              <button class='btn btn-success' (click)="onSubmit()">
+                                Save
+                              </button> 
+                              <button class='btn btn-warning' (click)="hidepopup()">
+                                Close</button
+                              >
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                  
+                    
+ 
+                  </div>
+                </div>
+                </div>
+   
+  
+              </div>
+            </div>
+          
+          
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+</div>
+</ng-template>
+ 
+
+
+
+
