@@ -35,63 +35,63 @@ const routes: Routes = [
     children: [
       {
         path: "dashboards",
-        loadChildren: "./pages/dashboards/dashboards.module#DashboardsModule"
+        loadChildren: () => import('./pages/dashboards/dashboards.module').then(x => x.DashboardsModule)
       },
       {
         path: "usermanagement",
-        loadChildren: "./pages/user-management/user-management.module#UserManagementModule"
+        loadChildren: () => import('./pages/user-management/user-management.module').then(x => x.UserManagementModule)
       },
       {
         path: "master",
-        loadChildren: "./pages/master/master.module#MasterModule"
+        loadChildren: () => import('./pages/master/master.module').then(x => x.MasterModule)
       },
       {
         path: "process",
-        loadChildren: "./pages/process/process.module#ProcessModule"
+        loadChildren: () => import('./pages/process/process.module').then(x => x.ProcessModule)
       },
       {
         path: "report",
-        loadChildren: "./pages/report/report.module#ReportModule"
+        loadChildren: () => import('./pages/report/report.module').then(x => x.ReportModule)
       },
       {
         path: "upload",
-        loadChildren: "./pages/upload/upload.module#UploadModule"
+        loadChildren: () => import('./pages/upload/upload.module').then(x => x.UploadModule)
       },
       {
         path: "search",
-        loadChildren: "./pages/search/search.module#SearchModule"
+        loadChildren: () => import('./pages/search/search.module').then(x => x.SearchModule)
       },
       {
         path: "components",
-        loadChildren: "./pages/components/components.module#ComponentsModule"
+        loadChildren: () => import('./pages/components/components.module').then(x => x.ComponentsModule)
       },
       {
         path: "forms",
-        loadChildren: "./pages/forms/forms.module#FormsModules"
+        loadChildren: () => import('./pages/forms/forms.module').then(x => x.FormsModules)
       },
       {
         path: "tables",
-        loadChildren: "./pages/tables/tables.module#TablesModule"
+        loadChildren: () => import('./pages/tables/tables.module').then(x => x.TablesModule)
       },
       {
         path: "maps",
-        loadChildren: "./pages/maps/maps.module#MapsModule"
+        loadChildren: () => import('./pages/maps/maps.module').then(x => x.MapsModule)
       },
       {
         path: "widgets",
-        loadChildren: "./pages/widgets/widgets.module#WidgetsModule"
+        loadChildren: () => import('./pages/widgets/widgets.module').then(x => x.WidgetsModule)
       },
       {
         path: "charts",
-        loadChildren: "./pages/charts/charts.module#ChartsModule"
+        loadChildren: () => import('./pages/charts/charts.module').then(x => x.ChartsModule)
       },
       {
         path: "calendar",
-        loadChildren: "./pages/calendar/calendar.module#CalendarModule"
+        loadChildren: () => import('./pages/calendar/calendar.module').then(x => x.CalendarModule)
       },
       {
         path: "examples",
-        loadChildren: "./pages/examples/examples.module#ExamplesModule"
+        loadChildren: () => import('./pages/examples/examples.module').then(x => x.ExamplesModule)
       }
     ]
   },
@@ -101,8 +101,7 @@ const routes: Routes = [
     children: [
       {
         path: "examples",
-        loadChildren:
-          "./layouts/auth-layout/auth-layout.module#AuthLayoutModule"
+        loadChildren: () => import('./layouts/auth-layout/auth-layout.module').then(x => x.AuthLayoutModule)
       }
     ]
   },
